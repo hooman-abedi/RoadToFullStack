@@ -1,5 +1,3 @@
-//some stops as soon as it finds one match. If the first item passes, it returns true immediately without checking the rest. This makes it efficient.
-// Real use case — before showing a "premium packages" section on your marketplace homepage, check if any exist:
 const trainersDB = [
     { id: 1, name: "Hooman Abedi", specialty: "Fitness", rating: 4.9, totalStudents: 855, isVerified: true, yearsActive: 5 },
     { id: 2, name: "Sara Ahmadi", specialty: "Yoga", rating: 4.7, totalStudents: 512, isVerified: true, yearsActive: 3 },
@@ -27,15 +25,16 @@ const purchasesDB = [
     { id: 6, studentId: 202, packageId: 101, amount: 149, date: "2026-03-01" },
     { id: 7, studentId: 205, packageId: 102, amount: 79, date: "2026-03-10" }
 ]
-// Is there at least one unverified trainer?
-const hasUnverifiedTrainers = trainersDB.some(trainer => trainer.isVerified === false)
-console.log(hasUnverifiedTrainers)
-// Is there at least one package over $200?
-const hasExpensivePackage = packagesDB.some(pkg => pkg.price > 200)
-console.log(hasExpensivePackage)
-const hasVeryExpensive = packagesDB.some(pkg => pkg.price > 500)
-console.log(hasVeryExpensive) // false — nothing over $500
-const showPremiumSection = packagesDB.some(pkg => pkg.price > 100)
-if (showPremiumSection) {
-    console.log("Showing premium packages section")
-}
+
+const allTagsNested = packagesDB.map(pkg => pkg.tags)
+console.log(allTagsNested)
+const allTags = allTagsNested.flat(1)
+console.log(allTags)
+
+const deeplyNested = [1, [2, [3, [4]]]]
+console.log(deeplyNested.flat(2))
+console.log(deeplyNested.flat(Infinity))
+
+
+const x = packagesDB.flatMap(pkg => pkg.tags)
+console.log(x)
